@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -16,6 +18,12 @@ class Event extends Model
         'fecha_fin',
         'lugar',
         'user_id'
+
+    use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'start'
     ];
 }
 

@@ -33,6 +33,20 @@ class CalendarController extends Controller
             'lugar'        => $request->lugar ?? 'Aula Magna',
             'user_id'      => auth()->id(), // Aqui se guarda quien creó el evento
 
+
+    // MOSTRAR CALENDARIO
+    public function index()
+    {
+        $events = Event::all();
+        return view('calendar', compact('events'));
+    }
+
+    // GUARDAR EVENTO
+    public function store(Request $request)
+    {
+        Event::create([
+            'title' => $request->title,
+            'start' => $request->start
         ]);
 
         return response()->json(['success' => true]);
@@ -70,6 +84,7 @@ class CalendarController extends Controller
 
         return response()->json(['success' => true]);
     }
+
 }
 
 

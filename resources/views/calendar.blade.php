@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Calendario Academico</title>
+    <title>Calendario Académico</title>
 
     <!-- ================== ESTILOS ================== -->
 
@@ -61,11 +62,13 @@
     <div class="card shadow">
         <div class="card-header header-personalizado">
             📅 Calendario Academico
+            📅 Calendario Académico
         </div>
 
         <div class="card-body">
             <p class="text-muted">
                 Registra tus tareas y recordatorios academicos por día.
+                Registra tus tareas y recordatorios académicos por día.
             </p>
 
             <div id="calendar"></div>
@@ -145,6 +148,11 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales/es.global.min.js"></script>
+
+<!-- ================== SCRIPTS ================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/locales/es.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -241,6 +249,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     
+
+        height: 500,
+
+        buttonText: {
+            today: 'Hoy'
+        },
+
+        // 👉 EVENTOS DESDE LA BASE DE DATOS
+        events: @json($events),
+
+        // 👉 GUARDAR EVENTO
+        dateClick: function(info) {
+            let title = prompt("¿Qué tienes que hacer este día?");
+
+            if (title) {
+                fetch('/calendar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                        start: info.dateStr
+                    })
+                }).then(() => location.reload());
+            }
+        }
+    });
+
+    calendar.render();
 });
 </script>
 
