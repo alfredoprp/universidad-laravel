@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         {{-- Logo temporal CRUDY --}}
-                        <span class="text-xl font-extrabold text-white tracking-wide">
+                        <span class="text-xl font-bold text-white tracking-wide">
                             CRUDY
                         </span>
                     </a>
@@ -35,7 +35,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-200 bg-slate-700 hover:text-white focus:outline-none transition">
+                        <button class="inline-flex items-center px-3 py-2 border-transparent text-sm leading-4 font-medium rounded-md text-gray-200 bg-slate-700 hover:text-white focus:outline-none transition">
                             <div class="flex items-center">
                                 @if(Auth::user()->avatar)
                                 <img src="{{ asset('storage/' . Auth::user()->avatar) }}" class="h-8 w-8 rounded-full object-cover border-2 border-indigo-500">
