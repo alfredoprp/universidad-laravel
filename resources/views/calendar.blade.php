@@ -12,41 +12,70 @@
 
     <style>
         .header-personalizado {
-            background-color: #501010;
+            background-color: #383a4f;
             color: white;
             font-size: 18px;
             font-weight: bold;
         }
 
         .fc .fc-col-header-cell-cushion {
-            color: #000;
+            color: #6366f1;
             font-weight: bold;
         }
 
         .fc-daygrid-day-number {
-            color: #000;
+            color: #ffffff;
             text-decoration: none;
+        }
+
+        .fc {
+            background-color: #111827; /* El mismo gris oscuro de tu dashboard */
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        /* Color de los encabezados (lun, mar, etc.) */
+        .fc-col-header-cell {
+            background-color: #1f2937;
+            color: #333355;
+        }
+
+        /* Cambiar el color de las celdas y bordes */
+        .fc-theme-standard td, .fc-theme-standard th {
+            border: 1px solid #374151 !important;
+        }
+
+        /* Cambiar el color del boton "Hoy" y las flechas para que sean como el boton "Aprender" */
+        .fc-button-primary {
+            background-color: #6366f1 !important; /* El morado de tu dashboard */
+            border-color: #6366f1 !important;
+        }
+
+        /* Cambiar el fondo del dia actual */
+        .fc .fc-daygrid-day.fc-day-today {
+            background-color: rgba(99, 102, 241, 0.2) !important; /* Un morado muy transparente */
         }
     </style>
 </head>
 
 <body class="bg-light">
 
-<div class="container mt-4">
-    <div class="card shadow">
-        <div class="card-header header-personalizado">
-            📅 Calendario Académico
-        </div>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
+            {{ __('Calendario Académico') }}
+        </h2>
+    </x-slot>
 
-        <div class="card-body">
-            <p class="text-muted">
-                Registra tus tareas y recordatorios académicos por día.
-            </p>
-
-            <div id="calendar"></div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-slate-900 overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <div id='calendar'></div>
+            </div>
         </div>
     </div>
-</div>
+</x-app-layout>
 
 <!-- MODAL CREAR EVENTO -->
 <div class="modal fade" id="eventoModal" tabindex="-1">
@@ -110,11 +139,6 @@
     </div>
 </div>
 
-<!-- LOGOUT -->
-<form method="POST" action="{{ route('logout') }}" class="mt-3 text-center">
-    @csrf
-    <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>
-</form>
 
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -126,13 +150,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const calendarEl = document.getElementById('calendar');
 
-    const calendar = new FullCalendar.Calendar(calendarEl, {
+    var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
+        eventColor: '#ffffff', 
+        eventTextColor: '#4b83b8',
         locale: 'es',
         firstDay: 1,
         height: 600,
         events: @json($events),
-
+        
         dateClick(info) {
             document.getElementById('fecha_inicio').value = info.dateStr;
             new bootstrap.Modal(document.getElementById('eventoModal')).show();

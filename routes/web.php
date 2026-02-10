@@ -12,9 +12,8 @@ use App\Http\Controllers\LevelController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
-
 /*
 |--------------------------------------------------------------------------
 | Dashboard
@@ -81,6 +80,5 @@ Route::middleware('auth')->group(function () {
 */
 
 require __DIR__.'/auth.php';
-
 
 

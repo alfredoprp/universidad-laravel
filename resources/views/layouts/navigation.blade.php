@@ -22,6 +22,12 @@
                     >
                         Lenguajes
                     </x-nav-link>
+
+                    <x-nav-link :href="url('/calendar')" :active="request()->is('calendar')"
+                        class="text-xl font-extrabold text-gray-100 hover:text-white tracking-wide"
+                    >
+                        {{ __('Calendario') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -30,12 +36,19 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-200 bg-slate-700 hover:text-white focus:outline-none transition">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            <div class="flex items-center">
+                                @if(Auth::user()->avatar)
+                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" class="h-8 w-8 rounded-full object-cover border-2 border-indigo-500">
+                                @else
+                                <svg class="h-8 w-8 text-gray-400 bg-gray-700 rounded-full p-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
+                                @endif
+                                <div class="ml-1 text-gray-400">
+                                    <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
+                                        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                                    </svg>
+                                </div>
                             </div>
                         </button>
                     </x-slot>
@@ -50,8 +63,8 @@
                             <x-dropdown-link
                                 :href="route('logout')"
                                 onclick="event.preventDefault(); this.closest('form').submit();"
-                            >
-                                Cerrar sesión
+                                class="text-indigo-400 hover:text-indigo-300">
+                                {{ __('Cerrar Sesión') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
