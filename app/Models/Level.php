@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Exercise;
 
 class Level extends Model
 {
@@ -12,4 +13,15 @@ class Level extends Model
         'description',
         'order'
     ];
+
+    // Un nivel tiene muchos ejercicios
+    public function exercises()
+    {
+        return $this->hasMany(Exercise::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'order';
+    }
 }

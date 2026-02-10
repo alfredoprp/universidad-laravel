@@ -2,19 +2,32 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Language;
+use App\Models\Level;
 
 class LanguageSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Language::create([
+        $python = Language::create([
             'name' => 'Python',
-            'slug' => 'python'
+            'slug' => 'python',
+        ]);
+
+        Level::create([
+            'language_id' => $python->id,
+            'title' => 'Variables en Python',
+            'description' => 'Aprende a declarar y usar variables.',
+            'order' => 1,
+        ]);
+
+        Level::create([
+            'language_id' => $python->id,
+            'title' => 'Condicionales',
+            'description' => 'Uso de if, else y elif.',
+            'order' => 2,
         ]);
     }
 }
+

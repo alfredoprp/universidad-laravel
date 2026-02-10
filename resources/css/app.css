@@ -2,33 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-.level-card {
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-    transition: transform 0.2s;
+/* ================================
+   Animación desbloqueo de nivel
+   ================================ */
+
+@keyframes unlock {
+    0% {
+        transform: scale(0.85);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+    }
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+        box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    }
 }
 
-.level-card:hover {
-    transform: scale(1.03);
+.animate-unlock {
+    animation: unlock 0.6s ease-out forwards;
 }
 
-.level-card.locked {
-    background: #e5e7eb;
-    opacity: 0.5;
-}
 
-.level-card.unlocked {
-    background: #bfdbfe;
-}
-
-.level-card.completed {
-    background: #bbf7d0;
-}
-
-.status {
-    display: inline-block;
-    margin-top: 8px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}

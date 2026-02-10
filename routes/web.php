@@ -44,11 +44,36 @@ Route::middleware('auth')->group(function () {
     Route::put('/calendar/{id}', [CalendarController::class, 'update']);
     Route::delete('/calendar/{id}', [CalendarController::class, 'destroy']);
 
-    // Sistema de niveles (Python)
+    /*
+    |--------------------------------------------------------------------------
+    | Sistema de niveles (Python)
+    |--------------------------------------------------------------------------
+    */
+
+    // Mapa de niveles
     Route::get('/python', [LevelController::class, 'index'])
         ->name('python.map');
-});
 
+    // Ver un nivel específico
+    Route::get('/python/level/{level}', [LevelController::class, 'show'])
+        ->name('levels.show');
+
+    // Progreso
+     Route::post('/levels/{level}/next', [LevelController::class, 'nextStep'])
+        ->name('levels.next');
+
+    // ✅ COMPLETAR NIVEL
+    Route::post('/python/level/{level}/complete', [LevelController::class, 'complete'])
+        ->name('levels.complete');
+
+    // Continuar Nivel
+    Route::get('/continuar-aprendizaje', [LevelController::class, 'continue'])
+        ->name('learning.continue');
+    
+    // Retroceder paso
+    Route::post('/levels/{level}/prev', [LevelController::class, 'prevStep'])
+        ->name('levels.prev');
+});
 /*
 |--------------------------------------------------------------------------
 | Auth routes (Breeze)
@@ -56,5 +81,6 @@ Route::middleware('auth')->group(function () {
 */
 
 require __DIR__.'/auth.php';
+
 
 
