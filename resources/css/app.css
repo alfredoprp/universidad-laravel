@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.level-card {
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.level-card:hover {
+    transform: scale(1.03);
+}
+
+.level-card.locked {
+    background: #e5e7eb;
+    opacity: 0.5;
+}
+
+.level-card.unlocked {
+    background: #bfdbfe;
+}
+
+.level-card.completed {
+    background: #bbf7d0;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
